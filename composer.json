@@ -1,0 +1,23 @@
+{
+  "name": "ypppa/commissions",
+  "description": "test task",
+  "type": "project",
+  "require": {
+    "php": "^7.4",
+    "symfony/console": "^5.4",
+    "guzzlehttp/guzzle": "^7.5",
+    "ext-json": "*",
+    "psr/log": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ypppa\\Commissions\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Yuri Gaidoba",
+      "email": "yuri.gaidoba@gmail.com"
+    }
+  ]
+}
