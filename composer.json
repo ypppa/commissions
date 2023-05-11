@@ -19,5 +19,8 @@
       "name": "Yuri Gaidoba",
       "email": "yuri.gaidoba@gmail.com"
     }
-  ]
+  ],
+  "require-dev": {
+    "symfony/test-pack": "^1.1"
+  }
 }

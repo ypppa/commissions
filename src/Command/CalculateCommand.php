@@ -31,7 +31,7 @@ class CalculateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $baseCurrency = $input->getArgument('baseCurrency') ? : self::BASE_CURRENCY;
+        $baseCurrency = $input->getArgument('baseCurrency') ?: self::BASE_CURRENCY;
         $filePath = $input->getArgument('filePath');
 
         $logger = new ConsoleLogger($output);

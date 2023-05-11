@@ -4,6 +4,7 @@ namespace Ypppa\Commissions\Service;
 
 use Ypppa\Commissions\Contract\BinProviderInterface;
 use Ypppa\Commissions\Exception\BinLookupErrorException;
+use Ypppa\Commissions\Exception\RateNotFoundException;
 use Ypppa\Commissions\Model\Transaction;
 use Ypppa\Commissions\Utils\CountryHelper;
 
@@ -30,12 +31,15 @@ class CommissionCalculator
      * @param Transaction $transaction
      *
      * @return void
-     * @throws BinLookupErrorException
+     * @throws BinLookupErrorException|RateNotFoundException
      */
     public function calculate(Transaction $transaction): void
     {
         $bin = $this->binList->lookup($transaction->getBin());
         $commission = CountryHelper::isEUCountry($bin->GetAlpha2CountryCode()) ? self::EU_COMMISSION : self::NON_EU_COMMISSION;
+        if (!isset($this->currencyRates[$transaction->getCurrency()])) {
+            throw new RateNotFoundException($transaction->getCurrency());
+        }
         $rate = $this->currencyRates[$transaction->getCurrency()];
         $commissionAmount = round($transaction->getAmount() / $rate * $commission, 2);
         $transaction->setCommissionCurrency($this->baseCurrency);
